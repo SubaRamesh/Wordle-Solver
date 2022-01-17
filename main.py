@@ -16,16 +16,6 @@ f1 = open('letterFreq.json')
 letter_frequency = json.load(f1)
 f1.close()
 
-# yes or no outline
-def yes_or_no(question):
-    reply = str(input(question+' (y/n): ')).lower().strip()
-    if reply[0] == 'y':
-        return True
-    if reply[0] == 'n':
-        return False
-    else:
-        return yes_or_no("Uhhhh... please enter ")
-
 
 # updates wordList with information from last guessed word
 def updateWithGuess(wordList, guess, guessResult):
@@ -108,13 +98,11 @@ def get_guess(guess_wordList, sol_wordList):
 testing
 '''
 
-
-
 # best first guess is roate, try running get_guess with no previous knowledge
 
 words_per_guess = {}
 
-def solve(answer):
+def eval(answer):
     num_guesses = 0
     currWords = guess_words
     possible_solutions = solution_words
@@ -141,20 +129,47 @@ def solve(answer):
     
 
 # for word in solution_words:
-#     solve(word)
+#     eval(word)
     # print("ANSWER:", word)
 
 # print(words_per_guess)
 
 # results: {3: 1157, 4: 915, 6: 22, 2: 74, 5: 140, 8: 2, 7: 5} which is the same as 3.5257019438444925
 
-results = {3: 1157, 4: 915, 6: 22, 2: 74, 5: 140, 8: 2, 7: 5}
-sum = 0
-total = 0
+# results = {3: 1157, 4: 915, 6: 22, 2: 74, 5: 140, 8: 2, 7: 5}
+# sum = 0
+# total = 0
 
-for val in results:
-    sum += val * results[val]
-    total += results[val]
+# for val in results:
+#     sum += val * results[val]
+#     total += results[val]
 
-print(sum/total)
+# print(sum/total)
+
+def solve():
+    num_guesses = 0
+    currWords = guess_words
+    possible_solutions = solution_words
+    
+    while True:
+        num_guesses += 1
+        if num_guesses == 1:
+            word = "roate"
+        else:
+            word = get_guess(guess_words, possible_solutions)
+        print("guess:", word)
+        
+        result = input("guess result: ")
+        # print("result:", result)
+        if result == "GGGGG":
+            print("Yeet!")
+            break
+        
+        currWords = updateWithGuess(currWords, word, result)
+        possible_solutions = updateWithGuess(possible_solutions, word, result)
+        # print("words left guess:", len(currWords), "solutions:", possible_solutions)
+
+solve()
+        
+    
     
