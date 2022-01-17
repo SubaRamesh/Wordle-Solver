@@ -140,9 +140,21 @@ def solve(answer):
     words_per_guess[num_guesses] = words_per_guess.get(num_guesses, 0) + 1
     
 
-for word in solution_words:
-    solve(word)
+# for word in solution_words:
+#     solve(word)
     # print("ANSWER:", word)
 
-print(words_per_guess)
+# print(words_per_guess)
+
+# results: {3: 1157, 4: 915, 6: 22, 2: 74, 5: 140, 8: 2, 7: 5} which is the same as 3.5257019438444925
+
+results = {3: 1157, 4: 915, 6: 22, 2: 74, 5: 140, 8: 2, 7: 5}
+sum = 0
+total = 0
+
+for val in results:
+    sum += val * results[val]
+    total += results[val]
+
+print(sum/total)
     
