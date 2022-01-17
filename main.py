@@ -89,7 +89,7 @@ def get_guess(guess_wordList, sol_wordList):
         avg_size = sum((s * s for s in result_strings.values())) / sum((s for s in result_strings.values()))
         
         #calculate score of word
-        return word_score_freq(word) * avg_size
+        return avg_size
 
 
     bestGuess = ""
@@ -110,7 +110,7 @@ testing
 
 
 
-# print(len(currWords))
+# best first guess is roate, try running get_guess with no previous knowledge
 
 words_per_guess = {}
 
@@ -122,27 +122,27 @@ def solve(answer):
     while True:
         num_guesses += 1
         if num_guesses == 1:
-            word = "raile"
+            word = "roate"
         else:
             word = get_guess(guess_words, possible_solutions)
-        print("guess:", word)
+        # print("guess:", word)
         
         result = create_result(word, answer)
-        print("result:", result)
+        # print("result:", result)
         if result == "GGGGG":
             break
         
         currWords = updateWithGuess(currWords, word, result)
         possible_solutions = updateWithGuess(possible_solutions, word, result)
-        print("words left guess:", len(currWords), "solutions:", possible_solutions)
+        # print("words left guess:", len(currWords), "solutions:", possible_solutions)
     
-    print(num_guesses)
+    print(answer, num_guesses)
     words_per_guess[num_guesses] = words_per_guess.get(num_guesses, 0) + 1
     
 
 for word in solution_words:
     solve(word)
-    print("ANSWER:", word)
+    # print("ANSWER:", word)
 
 print(words_per_guess)
     
