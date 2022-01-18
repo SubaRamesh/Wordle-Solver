@@ -169,7 +169,21 @@ def solve():
         possible_solutions = updateWithGuess(possible_solutions, word, result)
         # print("words left guess:", len(currWords), "solutions:", possible_solutions)
 
-solve()
-        
+# solve()
+
+def possibilities():
+    possible_solutions = solution_words
+    num_guesses = int(input("number of guesses: "))
     
+    while num_guesses > 0:
+        word = input("guess: ")
+        result = input("result: ")
+        
+        possible_solutions = updateWithGuess(possible_solutions, word, result)
+        print(len(possible_solutions), possible_solutions)
+        
+        num_guesses -= 1
+        
+
+possibilities()
     
